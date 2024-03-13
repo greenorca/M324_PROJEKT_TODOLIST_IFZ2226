@@ -76,7 +76,7 @@ class App extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log("Sending task description to Spring-Server: "+this.state.taskdescription);
-    fetch("http://localhost:8080/tasks", {  // API endpoint (the complete URL!) to save a taskdescription
+    fetch("http://localhost:8080/todo/tasks", {  // API endpoint (the complete URL!) to save a taskdescription
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -103,7 +103,7 @@ class App extends React.Component {
   ** It updates the component's state with the fetched todos from the API Endpoint '/'.
   */
   componentDidMount() {
-    fetch("http://localhost:8080")    // API endpoint (the complete URL!) to get a taskdescription-list
+    fetch("http://localhost:8080/todo/")    // API endpoint (the complete URL!) to get a taskdescription-list
       .then(response => response.json())
       .then(data => {
         console.log("Receiving task list data from Spring-Server: ");
@@ -118,7 +118,7 @@ class App extends React.Component {
   */
   handleClick = taskdescription => {
     console.log("Sending task description to delete on Spring-Server: "+taskdescription);
-    fetch(`http://localhost:8080/delete`, { // API endpoint (the complete URL!) to delete an existing taskdescription in the list
+    fetch(`http://localhost:8080/todo/delete`, { // API endpoint (the complete URL!) to delete an existing taskdescription in the list
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -142,9 +142,12 @@ class App extends React.Component {
     return (
       <ul className='tasks'>
         {todos.map((todo, index) => (
-          <li key={todo.taskdescription}>
-            {"Task " + (index+1) + ": "+ todo.taskdescription}
-            <button onClick={this.handleClick.bind(this, todo.taskdescription)}>Done</button>
+          <li key={todo.taskdescription} className='flexbox'>
+            <div>{"Task " + (index+1)}</div>
+            <div>{todo.taskdescription}</div>
+            <div>
+              <button onClick={this.handleClick.bind(this, todo.taskdescription)}>Done</button>
+            </div>
           </li>
         ))}
       </ul>

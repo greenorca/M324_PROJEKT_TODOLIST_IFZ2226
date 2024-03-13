@@ -10,8 +10,19 @@
 .tasks{
   list-style: none;
   text-align: left;
-  color:red;
+  color:green;
 }
+
+.tasks .flexbox {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr;
+  grid-column-gap: 1em;
+}
+
+.tasks .flexbox button{
+  float: right;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
