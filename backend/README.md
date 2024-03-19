@@ -1,5 +1,12 @@
 # TodoList-Backend
 
+## Installation
+
+## Datenbank
+
+```bash
+docker run -d --name wiss_todo_dbms -v wiss_todo_dbvolume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=changeme -p 3306:3306 mysql:8.0
+```
 
 
 ## Getting started
