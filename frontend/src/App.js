@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
+import TaskEntry from './TaskEntry';
 /**
  * ==================================
  * Gemeinsames Basisprojekt: ToDo-App
@@ -142,13 +143,7 @@ class App extends React.Component {
     return (
       <ul className='tasks'>
         {todos.map((todo, index) => (
-          <li key={todo.taskdescription} className='flexbox'>
-            <div>{"Task " + (index+1)}</div>
-            <div>{todo.taskdescription}</div>
-            <div>
-              <button onClick={this.handleClick.bind(this, todo.taskdescription)}>Done</button>
-            </div>
-          </li>
+          <TaskEntry todo={todo}/>
         ))}
       </ul>
     );
