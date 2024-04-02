@@ -2,11 +2,12 @@ version: '3.1'
 services:
 
   frontend:
-    image: frontend:1.0
-    environment: 
-      REACT_APP_API_SERVER: backend
+    build:
+      context: ../frontend
+      args:
+        - REACT_APP_API_URL=localhost:8080
     ports:
-      - '3000:3000'
+      - '3000:80'
     depends_on:
       - backend
 
@@ -14,7 +15,6 @@ services:
     image: backend:1.0
     environment:
       MYSQL_HOST: db
-      CORS_FRONTEND: frontend
     ports:
       - '8080:8080'
     depends_on:
