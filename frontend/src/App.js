@@ -11,7 +11,7 @@ import TaskEntry from './TaskEntry';
  * Execute and build information:
  *  - Frontend Start: npm start  (Terminalbefehl im Frontend Verzeichnis)
  *  - Backend Start: EE Eclipse-Projekt -> maven build -> spring-boot:run oder JAR auf docker mit Java 8 oder höher
- *  - Browser: http://localhost:3000 für Frontend; http://localhost:8080/ für Backend
+ *  - Browser: http://{process.env.REACT_APP_API_SERVER}:3000 für Frontend; http://{process.env.REACT_APP_API_SERVER}:8080/ für Backend
  *
  * Aktuelle Featureliste:
  *  - Singlepage App
@@ -77,7 +77,7 @@ class App extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log("Sending task description to Spring-Server: "+this.state.taskdescription);
-    fetch("http://localhost:8080/todo/tasks", {  // API endpoint (the complete URL!) to save a taskdescription
+    fetch(`http://backend:8080/todo/tasks`, {  // API endpoint (the complete URL!) to save a taskdescription
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -104,7 +104,7 @@ class App extends React.Component {
   ** It updates the component's state with the fetched todos from the API Endpoint '/'.
   */
   componentDidMount() {
-    fetch("http://localhost:8080/todo/")    // API endpoint (the complete URL!) to get a taskdescription-list
+    fetch(`http://backend:8080/todo/`)    // API endpoint (the complete URL!) to get a taskdescription-list
       .then(response => response.json())
       .then(data => {
         console.log("Receiving task list data from Spring-Server: ");
@@ -119,7 +119,7 @@ class App extends React.Component {
   */
   handleClick = taskdescription => {
     console.log("Sending task description to delete on Spring-Server: "+taskdescription);
-    fetch(`http://localhost:8080/todo/delete`, { // API endpoint (the complete URL!) to delete an existing taskdescription in the list
+    fetch(`http://backend:8080/todo/delete`, { // API endpoint (the complete URL!) to delete an existing taskdescription in the list
       method: "POST",
       headers: {
         "Content-Type": "application/json"
