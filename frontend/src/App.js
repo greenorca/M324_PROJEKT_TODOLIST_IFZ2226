@@ -77,7 +77,7 @@ class App extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log("Sending task description to Spring-Server: "+this.state.taskdescription);
-    fetch(`http://${process.env.REACT_APP_API_URL}/todo/tasks`, {  // API endpoint (the complete URL!) to save a taskdescription
+    fetch(`${process.env.REACT_APP_API_URL}/todo/tasks`, {  // API endpoint (the complete URL!) to save a taskdescription
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -104,7 +104,7 @@ class App extends React.Component {
   ** It updates the component's state with the fetched todos from the API Endpoint '/'.
   */
   componentDidMount() {
-    fetch(`http://${process.env.REACT_APP_API_URL}/todo/`)    // API endpoint (the complete URL!) to get a taskdescription-list
+    fetch(`${process.env.REACT_APP_API_URL}/todo/`)    // API endpoint (the complete URL!) to get a taskdescription-list
       .then(response => response.json())
       .then(data => {
         console.log("Receiving task list data from Spring-Server: "+process.env.REACT_APP_API_URL);
@@ -119,7 +119,7 @@ class App extends React.Component {
   */
   handleClick = taskdescription => {
     console.log("Sending task description to delete on Spring-Server: "+taskdescription);
-    fetch(`http://${process.env.REACT_APP_API_URL}/todo/delete`, { // API endpoint (the complete URL!) to delete an existing taskdescription in the list
+    fetch(`${process.env.REACT_APP_API_URL}/todo/delete`, { // API endpoint (the complete URL!) to delete an existing taskdescription in the list
       method: "POST",
       headers: {
         "Content-Type": "application/json"

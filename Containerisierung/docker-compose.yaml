@@ -5,14 +5,16 @@ services:
     build:
       context: ../frontend
       args:
-        - REACT_APP_API_URL=localhost:8080
+        - REACT_APP_API_URL=http://backend:8080 
+        # make sure for testing on localhost, that /etc/hosts points loopback to backend
     ports:
       - '3000:80'
     depends_on:
       - backend
 
   backend:
-    image: backend:1.0
+    build:
+      context: ../backend
     environment:
       MYSQL_HOST: db
     ports:
@@ -22,7 +24,6 @@ services:
   db:
     build: 
       context: backend/db
-    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: demo
     ports:
